@@ -16,10 +16,10 @@ public class CustomTenantConfigResolver implements TenantConfigResolver {
             // resolve to default tenant configuration
             return null;
         }
-        System.out.println("print here resolve");
+        System.out.println("print here resolve " + context);
         if ("tenant-a".equals(parts[1])) {
 
-            System.out.println("print here tenant-a");
+            System.out.println("print here tenant-a "+ context.getBodyAsString());
             OidcTenantConfig config = new OidcTenantConfig();
             config.setTenantId("tenant-a");
             config.setAuthServerUrl("http://localhost:8180/auth/realms/tenant-a");
