@@ -40,6 +40,8 @@ public class CustomTenantConfigResolver implements TenantConfigResolver {
             config.setAuthServerUrl("http://localhost:8180/auth/realms/tenant-a");
             config.setClientId("multi-tenant123");
             config.applicationType = OidcTenantConfig.ApplicationType.WEB_APP;
+
+            // set to false!!!! other will have issues
             config.setDiscoveryEnabled(false);
             config.setAuthorizationPath("protocol/openid-connect/auth");
             config.setTokenPath("protocol/openid-connect/token");
