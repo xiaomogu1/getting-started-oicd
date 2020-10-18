@@ -19,19 +19,18 @@ public class HomeResource {
 
     //docker exec -it <mycontainer> bash
 
-    /**
-     * Returns the tokens available to the application. This endpoint exists only for demonstration purposes, you should not
-     * expose these tokens in a real application.
-     *
-     * @return the landing page HTML
-     */
     @GET
     public String getHome() {
         StringBuilder response = new StringBuilder().append("<html>").append("<body>");
 
         response.append("<h2>Welcome, ").append(this.idToken.getClaim("email").toString()).append("</h2>\n");
         response.append("<h3>You are accessing the application within tenant <b>").append(idToken.getIssuer()).append(" boundaries</b></h3>");
-
+        response.append("<h2>full info, ").append(this.idToken ).append("</h2>\n");
+        String[] vals = this.idToken.getIssuer().split("[/]");
+        int last  = vals.length -1;
+        String tenant = vals[last];
+        String logout = this.idToken.getIssuer()+"/protocol/openid-connect/logout?redirect_uri=http://localhost:8080/"+ tenant;
+        response.append("<a href = "+logout+">Logout</a>");
         return response.append("</body>").append("</html>").toString();
     }
 }
